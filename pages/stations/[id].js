@@ -1,35 +1,9 @@
-import { ApolloProvider } from "@apollo/react-hooks";
-import ApolloClient from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
-
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import { GET_STATION } from "../api/queries";
 import Layout from "../../components/Layout";
-
-// const GET_STATION = gql`
-//   query($id: ID!) {
-//     getStation(id: $id) {
-//       station_ID
-//       inuse
-//       connected
-//       disabled
-//       available
-//       name
-//       free_usage
-//       onetimepayment
-//       sockets
-//       available
-//       sockets
-//       maxpower
-//       seller {
-//         currency
-//         onetimeminimum
-//       }
-//     }
-//   }
-// `;
 
 // TODO proptypes
 
@@ -105,17 +79,9 @@ const StationDetails = ({ id }) => {
 };
 
 export default function Station() {
-  const client = new ApolloClient({
-    uri: "http://localhost:3000/api/graphql",
-  });
-
   const router = useRouter();
   const { id } = router.query;
   if (!id) return <p>Loading station details</p>;
 
-  return (
-    <ApolloProvider client={client}>
-      <StationDetails id={id} />
-    </ApolloProvider>
-  );
+  return <StationDetails id={id} />;
 }

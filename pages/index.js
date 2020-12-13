@@ -1,21 +1,8 @@
-import { ApolloProvider } from "@apollo/react-hooks";
-import ApolloClient, { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
 import Link from "next/link";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import { GET_STATIONS } from "./api/queries";
-
-// const GET_STATIONS = gql`
-//   query {
-//     getStations {
-//       name
-//       station_ID
-//       available
-//     }
-//   }
-// `;
-// TODO proptypes
 
 const icon = (availability) =>
   availability === 1
@@ -64,18 +51,10 @@ const StationCards = () => {
 };
 
 export default function Home() {
-  const client = new ApolloClient({
-    uri: "http://localhost:3000/api/graphql",
-  });
-
   return (
-    <ApolloProvider client={client}>
-      <Layout title="Your Stations">
-        <h1 className="mt-10 sm:mt-40 mb-20 text-5xl font-bold">
-          Your stations
-        </h1>
-        <StationCards />
-      </Layout>
-    </ApolloProvider>
+    <Layout title="Your Stations">
+      <h1 className="mt-10 sm:mt-40 mb-20 text-5xl font-bold">Your stations</h1>
+      <StationCards />
+    </Layout>
   );
 }
