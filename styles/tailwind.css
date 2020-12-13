@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.base-width {
+  width: 608px;
+}
+
+body {
+  @apply bg-gray-200;
+}
+
+.station-list__icon {
+  transform: translate(4px, -2px);
+}
+
+.heading-link-icon {
+  height: 48px;
+  width: 48px;
+  display: inline-block;
+  @apply mr-6;
+  @apply transform;
+  @apply translate-y-2;
+  @apply bg-black;
+}
+.heading-link-icon::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 48px;
+  width: 48px;
+  background-size: contain;
+  background-position: center center;
+  background-image: url(/images/icon-arrow-white.png);
+  filter: invert(100%);
+}
+
+.heading-link-icon:hover {
+  background-color: transparent;
+}
+.heading-link-icon:hover::before {
+  filter: none;
+}
