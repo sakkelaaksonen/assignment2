@@ -42,7 +42,7 @@ const StationDetails = ({ id }) => {
   // Use a view model to transform values to display values.
 
   return (
-    <Layout title={name}>
+    <>
       <h1 className="mt-10 sm:mt-40 mb-20 text-5xl leading-snug font-bold">
         <Link href="/">
           <span className="heading-link-icon" />
@@ -74,7 +74,7 @@ const StationDetails = ({ id }) => {
           )}
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 
@@ -83,5 +83,9 @@ export default function Station() {
   const { id } = router.query;
   if (!id) return <p>Loading station details</p>;
 
-  return <StationDetails id={id} />;
+  return (
+    <Layout title={`Station ${id}`}>
+      <StationDetails id={id} />
+    </Layout>
+  );
 }
