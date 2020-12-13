@@ -1,65 +1,81 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { ApolloProvider } from "@apollo/react-hooks";
+import ApolloClient, { gql } from "apollo-boost";
+import { useQuery } from "@apollo/react-hooks";
+import Link from "next/link";
+import Head from "next/head";
+import Layout from "../components/Layout";
+import { GET_STATIONS } from "./api/queries";
+
+// const GET_STATIONS = gql`
+//   query {
+//     getStations {
+//       name
+//       station_ID
+//       available
+//     }
+//   }
+// `;
+// TODO proptypes
+
+const icon = (availability) =>
+  availability === 1
+    ? "/images/icon-available.png"
+    : "/images/icon-offline.png";
+
+const text = (availability) => (availability === 1 ? "Available" : "Offline");
+
+const StationCards = () => {
+  const { loading, error, data } = useQuery(GET_STATIONS);
+  // TODO fancy spinner or container with image. Talk with Designer
+  // Implement app-level standard loader and import here
+  if (loading) return <p>Loading...</p>;
+  // TODO app-level standard error component, import here
+  if (error) return <p>Error :(</p>;
+
+  return data.getStations.map(({ name, available, station_ID }) => (
+    <div
+      className="my-2 flex py-5 px-4 bg-white rounded-md"
+      key={`key-${station_ID}`}
+    >
+      <div className="flex-1">
+        <h2 className="font-bold text-xl sm:text-base">
+          <span className=" hover:text-gray-500 hover:underline">
+            <Link href={`/stations/${station_ID}`}>{name}</Link>
+          </span>
+        </h2>
+      </div>
+      <div className="w-24">
+        <div className="bg-gray-200 rounded-full">
+          <div className="inline-block ml-1 align-middle">
+            <img
+              className="inline-block station-list__icon align-middle"
+              src={icon(available)}
+              height="16"
+              width="16"
+            />
+          </div>
+          <span className="md:container mx-auto text-base sm:text-xs leading-3 pl-2 align-middle">
+            {text(available)}
+          </span>
+        </div>
+      </div>
+    </div>
+  ));
+};
 
 export default function Home() {
+  const client = new ApolloClient({
+    uri: "http://localhost:3000/api/graphql",
+  });
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+    <ApolloProvider client={client}>
+      <Layout title="Your Stations">
+        <h1 className="mt-10 sm:mt-40 mb-20 text-5xl font-bold">
+          Your stations
         </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+        <StationCards />
+      </Layout>
+    </ApolloProvider>
+  );
 }
