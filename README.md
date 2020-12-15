@@ -1,6 +1,17 @@
 # Virta Senior Front-end Developer assignment 2
 
-## How to run
+## About
+
+This is a demo app and repo for Virta Senior Front-end Developer assignment 2. Application follows given guidelines and is built with Nextjs,Tailwind CSS and GraphQL and deployed to Vercel cloud servise (previously known as now.sh)
+
+## Demo deployment
+
+Visit
+[https://assignment2-theta.vercel.app/](https://assignment2-theta.vercel.app/) with your browser.
+
+## Development instruction
+
+These instructions assume you have advanced 2020 level knowledge of JavaScript development and command tools.
 
 Open your preferred command terminal or git client and clone the repo.
 
@@ -23,11 +34,35 @@ npm run dev
 
 ```
 
+## Application structure
+
+Application is built using [Nextjs](https://nextjs.org/) and [Apollo GraphQL Server](https://www.apollographql.com/) and [TailwindCSS](https://tailwindcss.com/).
+
+App is deployed to [Vercel cloud service](https://vercel.com/) via [GitHub repo](https://github.com/sakkelaaksonen/assignment2)
+
+### Routes
+
+- `/pages/api/graphql.js` GraphQL API entry point.
+
+  Responds to `/api/graphql`
+
+- `/pages/index.js` Index view. Lists all stations returned from API via GraphQL.
+
+  Responds to `/(index.js)`
+
+- `/pages/stations/[id].js` Single station view. Accessible directly or via browsing the index.
+
+  Responds to `/stations/[id]`
+
 Open [http://localhost:3000/](http://localhost:3000/) in your browser and browse away
+
+## Known caveats
+
+- Because React hooks hide away asynchronity of useRoute and useQuery do not resolve as expected. This leads to missing router parameters in graphql queries and other temporal and scopic oddities.
 
 ## Production preparation and scability notes
 
-- Add real tests
+- Add tests
 
 - Add internationalization
 
