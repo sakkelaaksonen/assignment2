@@ -34,6 +34,8 @@ npm run dev
 
 ```
 
+Open [http://localhost:3000/](http://localhost:3000/) in your browser and browse away
+
 ## Application structure
 
 Application is built using [Nextjs](https://nextjs.org/) and [Apollo GraphQL Server](https://www.apollographql.com/) and [TailwindCSS](https://tailwindcss.com/).
@@ -54,7 +56,13 @@ App is deployed to [Vercel cloud service](https://vercel.com/) via [GitHub repo]
 
   Responds to `/stations/[id]`
 
-Open [http://localhost:3000/](http://localhost:3000/) in your browser and browse away
+### GraphQL
+
+- `/pages/api/queries/index.js` contains GraphQL queries for station list and single station by ID
+
+- `/pages/api/schemas/index.js` contains GraphQL schemas for given API endpoints
+
+- `/pages/api/resolvers/index.js` contains GraphQL resolvers for given API endpoints
 
 ## Known caveats
 
