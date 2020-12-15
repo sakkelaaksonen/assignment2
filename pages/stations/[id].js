@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
+
 import { GET_STATION } from "../api/queries";
 import Layout from "../../components/Layout";
 
@@ -45,7 +46,7 @@ const StationDetails = ({ id }) => {
     <>
       <h1 className="mt-10 sm:mt-40 mb-20 text-5xl leading-snug font-bold">
         <Link href="/">
-          <span className="heading-link-icon" />
+          <span className="heading-link__icon" />
         </Link>
         {name}
       </h1>
@@ -81,6 +82,12 @@ const StationDetails = ({ id }) => {
 export default function Station() {
   const router = useRouter();
   const { id } = router.query;
+  /*
+   * DEV NOTE: useRouter & useQuery do not resolve in order if appearence due to
+   * hidden asyncronicity of React Hooks.
+   * UseQuery can be mounted only after useRouter has resolved with a value.
+   * This can be migitated with server side rendering
+   */
   if (!id) return <p>Loading station details</p>;
 
   return (
