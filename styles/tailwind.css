@@ -14,7 +14,7 @@ body {
   transform: translate(4px, -2px);
 }
 
-.heading-link-icon {
+.heading-link__icon {
   height: 48px;
   width: 48px;
   display: inline-block;
@@ -23,7 +23,7 @@ body {
   @apply translate-y-2;
   @apply bg-black;
 }
-.heading-link-icon::before {
+.heading-link__icon::before {
   content: "";
   position: absolute;
   top: 0;
@@ -36,9 +36,9 @@ body {
   filter: invert(100%);
 }
 
-.heading-link-icon:hover {
+.heading-link__icon:hover {
   background-color: transparent;
 }
-.heading-link-icon:hover::before {
+.heading-link__icon:hover::before {
   filter: none;
 }
