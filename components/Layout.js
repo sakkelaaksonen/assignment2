@@ -4,6 +4,8 @@ import ApolloClient, { gql } from "apollo-boost";
 import Head from "next/head";
 import Link from "next/link";
 
+// TODO proptypes
+
 export default function Layout({ title, children }) {
   const client = new ApolloClient({
     uri: "/api/graphql",
