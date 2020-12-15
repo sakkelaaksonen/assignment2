@@ -15,7 +15,9 @@ const StationCards = () => {
   const { loading, error, data } = useQuery(GET_STATIONS);
   // TODO fancy spinner or container with image. Talk with Designer
   // Implement app-level standard loader and import here
+
   if (loading) return <p>Loading...</p>;
+
   // TODO app-level standard error component, import here
   if (error) return <p>Error :(</p>;
 
