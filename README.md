@@ -10,7 +10,7 @@ Visit
 [https://assignment2-theta.vercel.app/](https://assignment2-theta.vercel.app/) with your browser.
 
 - [https://assignment2-theta.vercel.app/](https://assignment2-theta.vercel.app/) -> list view
-- [https://assignment2-theta.vercel.app/](https://assignment2-theta.vercel.app/stations/101) -> single station view
+- [https://assignment2-theta.vercel.app/stations/101](https://assignment2-theta.vercel.app/stations/101) -> single station view
 
 ## Development instruction
 
