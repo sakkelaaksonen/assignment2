@@ -9,9 +9,12 @@ This is a demo app and repo for Virta Senior Front-end Developer assignment 2. A
 Visit
 [https://assignment2-theta.vercel.app/](https://assignment2-theta.vercel.app/) with your browser.
 
+- [https://assignment2-theta.vercel.app/](https://assignment2-theta.vercel.app/) -> list view
+- [https://assignment2-theta.vercel.app/](https://assignment2-theta.vercel.app/stations/101) -> single station view
+
 ## Development instruction
 
-These instructions assume you have advanced 2020 level knowledge of JavaScript development and command tools.
+These instructions assume you have 2020 level knowledge of JavaScript development and command tools.
 
 Open your preferred command terminal or git client and clone the repo.
 
@@ -56,6 +59,8 @@ App is deployed to [Vercel cloud service](https://vercel.com/) via [GitHub repo]
 
   Responds to `/stations/[id]`
 
+- `next.config.js` contains redirection rules for missing parameters and blocked API routes
+
 ### GraphQL
 
 - `/pages/api/queries/index.js` contains GraphQL queries for station list and single station by ID
@@ -64,21 +69,31 @@ App is deployed to [Vercel cloud service](https://vercel.com/) via [GitHub repo]
 
 - `/pages/api/resolvers/index.js` contains GraphQL resolvers for given API endpoints
 
+### Stylesheets
+
+- `/styles/tailwind.css` contains tailwind module imports and application specific css definitions
+
+- `tailwind.config.js` contains tailwind configuration and purgeCSS globbing rules
+
+- `postcss.config.js` configures tailwind as a plugin for NextJS postCSS pipeline
+
 ## Known caveats
 
-- Because React hooks hide away asynchronity of useRoute and useQuery do not resolve as expected. This leads to missing router parameters in graphql queries and other temporal and scopic oddities.
+- Because React hooks hide away asynchronicity, useRoute and useQuery do not resolve as expected, in order of appearence. Async race condition leads to missing router parameters in graphql queries and other temporal and scopic oddities. This can be migitated using server side rendering.
 
 ## Production preparation and scability notes
 
+- Configure ESLint
+
 - Add tests
 
-- Add internationalization
+- Add internationalization/dictionary module
 
 - Add style preprocessor if required (stylus is my personal preference but anything goes)
 
 - Check accessibility requirements
 
-- Thorough assessment of meta content in views
+- Thorough assessment of meta content in views: viewport requirements, encodings, language configs etc.
 
 - Analytics if required
 
